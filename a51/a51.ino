@@ -1,21 +1,27 @@
 #include <SPI.h>
 
-int sce_pin = 8;
-int max_speed = 1000;
-int data_order;
-int data_mode = MODE_0;
+#define MAX_SPEED  1000000;
+#define DATA_ORDER MSBFIRST;
+#define DATA_MODE  SPI_MODE0;
+
+enum {SCE_PIN=8, RST_PIN=7};
 
 void setup() {
-  setupDisplay();
-}
-
-void setupDisplay() {
+  pinMode(SCE_PIN, OUTPUT);
+  pinMode(RST_PIN, OUTPUT);
+  
   reset();
-  SPI.beginTransaction(sce_pin, SPISettings(max_speed, data_order, data_mode));
+  SPI.beginTransaction(SCE_PIN, SPISettings(MAX_SPEED, DATA_ORDER, DATA_MODE));
 }
 
 void reset() {
-  
+  digitalWrite(RST_PIN, LOW);
+  delay(500);
+  digitalWrite(RST_PIN, HIGH);
+}
+
+void terminate() {
+  SPI.endTransaction();
 }
 
 void loop() {
@@ -26,7 +32,7 @@ void setPixel(int x, int y, int value) {
   if (inRange(x, y)) {
     
   }
-  SPI.transfer(sce_pin, data);
+  SPI.transfer(SCE_PIN, data);
 }
 
 void demo() {
