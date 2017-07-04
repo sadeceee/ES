@@ -154,11 +154,6 @@ void reset() {
   digitalWrite(RST, HIGH);
 }
 
-//damit es einheitlich mit beginTransaction ist
-void terminate() {
-  
-}
-
 void setup() {
   Serial.begin(9600);
   
@@ -192,7 +187,6 @@ void initializeBuffer() {
   }
 }
 
-//schreibt daten in ein register. ist das der buffer?
 void writeRegister(byte data) {
   SPI.beginTransaction(SCE, SPISettings(MAX_SPEED, DATA_ORDER, DATA_MODE));
   digitalWrite(DC, LOW);
@@ -233,7 +227,6 @@ void setContrast(float value) {
   writeRegister(0x20);
 }
 
-//soll einen pixel(bank?/register?) auf 0 oder 1 (value) setzen, wird noch nicht verwendet
 void setPixel(uint8_t x, uint8_t y, bool value) {    
   if (inRange(x, y)) {
     if (value) {
