@@ -27,7 +27,7 @@ void setup() {
 }
 
 void loop() {
-  printXY();
+  moveServoWithVelocityControl();
 }
 
 // Aufgabe 6.1
@@ -40,4 +40,26 @@ void printXY() {
   
   Serial.print("X: "); Serial.println(out_x);
   Serial.print("Y: "); Serial.println(out_y);
+}
+
+// Aufgabe 6.2
+void moveServoWithAnalogStick() {
+  servo_x.write((int) analogRead(OUT_X)/5.5);
+  servo_y.write((int) analogRead(OUT_Y)/5.5);
+}
+
+// Aufgabe 6.3
+void moveServoWithVelocityControl() {
+  if (angle_x+velocity_x <= 180 && angle_x+velocity_x >= 0) angle_x += (int) velocity_x;
+  if (angle_y+velocity_y <= 180 && angle_y+velocity_y >= 0) angle_y += (int) velocity_y;
+  
+  servo_x.write(angle_x);
+  servo_y.write(angle_y);
+  
+  velocity_x = analogRead(OUT_X)/100.0;
+  velocity_y = analogRead(OUT_Y)/100.0;
+  velocity_x -= 5;
+  velocity_y -= 5;
+  Serial.println(velocity_x);
+  Serial.println(velocity_y);
 }

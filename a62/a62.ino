@@ -27,7 +27,7 @@ void setup() {
 }
 
 void loop() {
-  printXY();
+  moveServoWithAnalogStick();
 }
 
 // Aufgabe 6.1
@@ -40,4 +40,10 @@ void printXY() {
   
   Serial.print("X: "); Serial.println(out_x);
   Serial.print("Y: "); Serial.println(out_y);
+}
+
+// Aufgabe 6.2
+void moveServoWithAnalogStick() {
+  servo_x.write((int) analogRead(OUT_X)/5.5);
+  servo_y.write((int) analogRead(OUT_Y)/5.5);
 }
