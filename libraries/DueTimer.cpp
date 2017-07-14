@@ -2,7 +2,7 @@
 #include <inttypes.h>
 #include "DueTimer.h"
 
-//#define USING_SERVO_LIB // Uncomment to enable use with Arduino's Servo library
+#define USING_SERVO_LIB // Uncomment to enable use with Arduino's Servo library
 #define DUE_F_CPU 84000000
 #define INVALID_TIMER 255
 
