@@ -1,7 +1,7 @@
 #include <DueTimer.h>
 #include <stdio.h>
 
-int pin_red = 10, pin_green = 9, pin_blue = 8;
+int pin_red = 9, pin_green = 8, pin_blue = 10;
 float red = 0.0, green = 1.0, blue = 1.0;
 
 void setup() {
